@@ -22,6 +22,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+@media (min-width: 1024px) {
+  body {
+    cursor: none;
+  }
+}
+
 .layout-container {
   width: 100%;
   margin-left: auto;

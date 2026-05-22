@@ -7,6 +7,7 @@ import Manifesto from "@/components/manifesto";
 import Footer from "@/components/footer";
 import Noise from "@/components/noise";
 import ScrollBar from "@/components/scroll-bar";
+import CustomCursor from "@/components/custom-cursor";
 
 export default function Home() {
   const [ready, setReady] = useState(false);
@@ -20,6 +21,9 @@ export default function Home() {
 
       {/* Scroll progress bar */}
       <ScrollBar />
+
+      {/* Custom cursor */}
+      <CustomCursor />
 
       {/* Main site — fades in after preloader */}
       <div
