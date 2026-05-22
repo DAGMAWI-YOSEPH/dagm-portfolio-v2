@@ -1,29 +1,34 @@
-import type { Metadata } from "next";
-import { Barlow_Condensed, Raleway } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { IBM_Plex_Mono, Newsreader } from "next/font/google";
 import "./globals.css";
 
-const barlowCondensed = Barlow_Condensed({
+export const viewport: Viewport = {
+  themeColor: "#dcd8c0",
+};
+
+const newsreader = Newsreader({
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400"],
-  variable: "--font-big-shoulders",
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-newsreader",
   display: "swap",
 });
 
-const raleway = Raleway({
+const ibmPlexMono = IBM_Plex_Mono({
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  variable: "--font-jost",
+  weight: ["400", "600", "700"],
+  variable: "--font-ibm-mono",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "Dagm Y — WordPress Developer",
   description:
-    "WordPress developer crafting precise, beautiful digital experiences from Addis Ababa.",
+    "A WordPress developer in Addis Ababa where craft meets technology. Building precise, beautiful websites with care.",
   openGraph: {
     title: "Dagm Y — WordPress Developer",
     description:
-      "WordPress developer crafting precise, beautiful digital experiences.",
+      "A WordPress developer in Addis Ababa where craft meets technology.",
     type: "website",
   },
 };
@@ -36,9 +41,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${barlowCondensed.variable} ${raleway.variable}`}
+      className={`${newsreader.variable} ${ibmPlexMono.variable}`}
     >
-      <body className="font-body">{children}</body>
+      <body className="bg-primary">{children}</body>
     </html>
   );
 }
