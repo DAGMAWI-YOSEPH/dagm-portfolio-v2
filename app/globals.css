@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@theme {
+  /* Canvas */
+  --color-canvas: oklch(8% 0.008 252);
+  --color-raised: oklch(11% 0.009 252);
+
+  /* Typography */
+  --color-snow: oklch(93% 0.006 82);
+  --color-ash: oklch(46% 0.007 82);
+  --color-ash-dim: oklch(32% 0.007 82);
+
+  /* Accent */
+  --color-gold: oklch(68% 0.12 52);
+
+  /* Structure */
+  --color-wire: oklch(16% 0.006 252);
+
+  /* Fonts */
+  --font-display: var(--font-big-shoulders), "Arial Narrow", system-ui, sans-serif;
+  --font-body: var(--font-jost), system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: oklch(8% 0.008 252);
+}
+
+body {
+  background-color: oklch(8% 0.008 252);
+  color: oklch(93% 0.006 82);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: oklch(68% 0.12 52);
+  color: oklch(8% 0.008 252);
+}
+
+* {
+  box-sizing: border-box;
+}
