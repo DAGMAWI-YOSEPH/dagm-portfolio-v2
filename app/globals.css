@@ -80,6 +80,32 @@ body {
   100% { transform: translate(0, 0); }
 }
 
+.layout-section-gap {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+@media (min-width: 640px) {
+  .layout-section-gap {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+}
+
+.text-h1-mobile {
+  font-size: clamp(2.5rem, 8vw, 3.5rem);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.text-h1 {
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
 /* Logo strip animation (matches the Synapser logo animation concept) */
 .logo-strip-left {
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);

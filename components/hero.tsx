@@ -1,93 +1,107 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-const ease = [0.16, 1, 0.3, 1] as const;
+const WORDS = [
+  "wordpress", "design", "craft", "precision", "web",
+  "speed", "elementor", "woocommerce", "addis", "ethiopia",
+  "performance", "responsive", "branding", "interface",
+  "digital", "development", "creativity", "quality",
+];
+
+interface WordPos {
+  top: number;
+  left: number;
+  delay: number;
+  duration: number;
+  yRange: number;
+}
 
 export default function Hero() {
+  const [positions, setPositions] = useState<WordPos[]>([]);
+
+  useEffect(() => {
+    setPositions(
+      WORDS.map(() => ({
+        top: Math.random() * 78 + 5,
+        left: Math.random() * 78 + 5,
+        delay: Math.random() * 4,
+        duration: Math.random() * 4 + 4,
+        yRange: Math.random() * 18 + 8,
+      }))
+    );
+  }, []);
+
   return (
-    <section className="relative h-[100svh] flex flex-col justify-between px-8 md:px-14 pt-8 pb-10 md:pb-12 overflow-hidden">
-      {/* Top row */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.15 }}
-        className="pt-16 flex justify-between items-center border-b border-wire pb-5"
-      >
-        <span className="font-body text-[0.65rem] tracking-[0.28em] uppercase text-ash">
-          001
-        </span>
-        <span className="font-body text-[0.65rem] tracking-[0.28em] uppercase text-ash">
-          Portfolio
-        </span>
-      </motion.div>
+    <div className="relative w-full h-screen overflow-hidden text-terciary">
+      {/* Floating italic words */}
+      {positions.map((pos, i) => (
+        <motion.div
+          key={WORDS[i]}
+          className="absolute font-sans italic text-base sm:text-lg md:text-xl opacity-80 z-10 cursor-pointer select-none"
+          style={{ top: `${pos.top}%`, left: `${pos.left}%` }}
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: [0, 0.8, 0.8],
+            y: [0, -pos.yRange, 0],
+          }}
+          transition={{
+            opacity: { duration: 0.8, delay: pos.delay },
+            y: {
+              duration: pos.duration,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: pos.delay,
+            },
+          }}
+        >
+          {WORDS[i]}
+        </motion.div>
+      ))}
 
-      {/* Main name block */}
-      <div className="flex-1 flex flex-col justify-center -mt-4">
-        <div className="overflow-hidden">
-          <motion.h1
-            initial={{ y: "110%" }}
-            animate={{ y: 0 }}
-            transition={{ duration: 1.1, delay: 0.3, ease }}
-            className="font-display font-thin text-snow leading-[0.88] tracking-[-0.025em] select-none"
-            style={{ fontSize: "clamp(5.5rem, 16vw, 19rem)" }}
+      {/* Centered wordmark */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+        <motion.div
+          className="w-[80vw] max-w-[900px] cursor-pointer"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          style={{ aspectRatio: "1600/240" }}
+        >
+          <svg
+            viewBox="0 0 1600 240"
+            preserveAspectRatio="xMidYMid meet"
+            className="h-full w-full"
+            aria-hidden="true"
           >
-            DAGM
-          </motion.h1>
-        </div>
-
-        <div className="overflow-hidden">
-          <motion.div
-            initial={{ y: "110%" }}
-            animate={{ y: 0 }}
-            transition={{ duration: 1.1, delay: 0.42, ease }}
-            className="flex items-baseline gap-4 md:gap-6"
-          >
-            <h1
-              className="font-display font-thin text-snow leading-[0.88] tracking-[-0.025em] select-none"
-              style={{ fontSize: "clamp(5.5rem, 16vw, 19rem)" }}
+            <text
+              x="800"
+              y="185"
+              textAnchor="middle"
+              fontFamily="var(--font-newsreader), Georgia, serif"
+              fontWeight="700"
+              fontSize="260"
+              fill="#535352"
+              letterSpacing="-4"
             >
-              Y
-            </h1>
-            <span
-              className="font-display font-thin text-gold leading-[0.88] tracking-[-0.025em]"
-              style={{ fontSize: "clamp(5.5rem, 16vw, 19rem)" }}
-            >
-              .
-            </span>
-          </motion.div>
-        </div>
+              DAGM Y
+            </text>
+          </svg>
+        </motion.div>
       </div>
 
-      {/* Bottom row */}
+      {/* Scroll hint */}
       <motion.div
+        className="absolute bottom-10 w-full text-center z-20"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.85 }}
-        className="flex justify-between items-end border-t border-wire pt-5"
+        transition={{ duration: 0.8, delay: 1.2 }}
       >
-        <div className="space-y-1.5">
-          <p className="font-body text-[0.65rem] font-light tracking-[0.22em] uppercase text-snow">
-            WordPress Developer
-          </p>
-          <p className="font-body text-[0.65rem] font-light tracking-[0.15em] text-ash">
-            Addis Ababa, Ethiopia
-          </p>
-        </div>
-
-        <div className="flex flex-col items-center gap-3">
-          <motion.div
-            animate={{ y: [0, 9, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col items-center gap-2"
-          >
-            <span className="font-body text-[0.6rem] tracking-[0.2em] uppercase text-ash-dim block">
-              Scroll
-            </span>
-            <div className="w-px h-10 bg-wire" />
-          </motion.div>
-        </div>
+        <span className="uppercase text-[10px] sm:text-xs tracking-widest opacity-50 font-mono">
+          Scroll to Explore
+        </span>
       </motion.div>
-    </section>
+    </div>
   );
 }

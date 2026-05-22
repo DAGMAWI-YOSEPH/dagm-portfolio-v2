@@ -3,6 +3,9 @@
 import { useState } from "react";
 import Preloader from "@/components/preloader";
 import Nav from "@/components/nav";
+import Hero from "@/components/hero";
+import MarqueeSection from "@/components/marquee-section";
+import WorksSlider from "@/components/works-slider";
 import Manifesto from "@/components/manifesto";
 import Footer from "@/components/footer";
 import Noise from "@/components/noise";
@@ -15,22 +18,18 @@ export default function Home() {
   return (
     <>
       <Preloader onDone={() => setReady(true)} />
-
-      {/* Noise overlay — always present */}
       <Noise />
-
-      {/* Scroll progress bar */}
       <ScrollBar />
-
-      {/* Custom cursor */}
       <CustomCursor />
 
-      {/* Main site — fades in after preloader */}
       <div
-        className="transition-opacity duration-500"
+        className="transition-opacity duration-500 bg-primary min-h-screen overflow-x-hidden"
         style={{ opacity: ready ? 1 : 0 }}
       >
         <Nav />
+        <Hero />
+        <MarqueeSection />
+        <WorksSlider />
         <Manifesto />
         <Footer />
       </div>
